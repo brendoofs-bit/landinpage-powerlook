@@ -16,10 +16,6 @@ const CATEGORIES = [
   { name: "TEEN", image: "https://res.cloudinary.com/doqw5aqcf/image/upload/v1773088648/jovens-mulheres-divertindo-comemoracao-png_j6xqqg.webp" }
 ];
 
-const BRANDS = [
-  "PowerLook", "Amissima", "Iorane", "Ateen", "TalieNK", "Roberto Cavalli", "Halston", "H&M", "Farm", "Carina Duek", "Agilitá"
-];
-
 const SHOWCASE_IMAGES = [
   "https://res.cloudinary.com/doqw5aqcf/image/upload/v1774308423/madrinha_35_y7ogdz.webp",
   "https://res.cloudinary.com/doqw5aqcf/image/upload/v1774308424/madrinha_01_cwp2au.png",
@@ -158,30 +154,21 @@ export default function App() {
     <div className="min-h-screen bg-white text-[#111111] font-sans selection:bg-[#C83333] selection:text-white">
       
       {/* Section 1: Hero */}
-      <section className="relative w-full h-screen min-h-[600px] flex flex-col items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          {/* Imagem Hero - Dimensão recomendada: 1920x1080px */}
-          <img 
-            src="https://res.cloudinary.com/doqw5aqcf/image/upload/v1773089078/Design_sem_nome_jkbbui.png" 
-            alt="Hero Background" 
-            className="w-full h-full object-cover"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-black/30"></div>
-        </div>
-        
-        <div className="relative z-10 flex flex-col items-center justify-center w-full px-4 text-center">
-          {/* Imagem Logo - Dimensão recomendada: 500x150px (proporção retangular) */}
-          <img 
-            src="https://res.cloudinary.com/doqw5aqcf/image/upload/v1773789401/logo_powerlook_vzu3or.webp" 
-            alt="PowerLook Logo" 
-            className="w-[70%] max-w-3xl mb-8 filter drop-shadow-lg"
-            referrerPolicy="no-referrer"
-          />
-          <h1 className="font-serif font-bold text-white text-3xl md:text-[45px] leading-tight w-[90%] md:w-[50%] max-w-4xl drop-shadow-md">
-            SEU VESTIDO DE FESTA ESTÁ AQUI
-          </h1>
-        </div>
+      <section className="relative w-full h-[975px] md:h-[700px] overflow-hidden">
+        {/* Imagem Hero Desktop - Dimensão recomendada: 1920x700px */}
+        <img 
+          src="https://res.cloudinary.com/doqw5aqcf/image/upload/v1774477622/banner-hero-versao-desktop_ctlfhr.png" 
+          alt="Hero Background Desktop" 
+          className="hidden md:block w-full h-full object-cover"
+          referrerPolicy="no-referrer"
+        />
+        {/* Imagem Hero Mobile - Dimensão recomendada: 1080x975px */}
+        <img 
+          src="https://res.cloudinary.com/doqw5aqcf/image/upload/v1774477622/banner-hero-versao-mobile_mhiqfc.png" 
+          alt="Hero Background Mobile" 
+          className="block md:hidden w-full h-full object-cover"
+          referrerPolicy="no-referrer"
+        />
       </section>
 
       {/* Section 2: Categories */}
@@ -214,17 +201,6 @@ export default function App() {
             <MessageCircle size={20} />
             Falar com Consultora
           </CTAButton>
-        </div>
-      </section>
-
-      {/* Section 3: Brands Marquee */}
-      <section className="bg-[#111111] text-white py-4 overflow-hidden h-[60px] flex items-center">
-        <div className="flex whitespace-nowrap animate-marquee">
-          {[...BRANDS, ...BRANDS, ...BRANDS].map((brand, index) => (
-            <span key={index} className="mx-8 font-serif text-lg tracking-widest uppercase opacity-80">
-              {brand}
-            </span>
-          ))}
         </div>
       </section>
 
@@ -272,7 +248,7 @@ export default function App() {
                 {item.step}
               </div>
               <div>
-                <h3 className="font-serif text-xl font-bold mb-2">{item.title}</h3>
+                <h3 className="font-sans text-xl font-bold mb-2">{item.title}</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
               </div>
             </div>
@@ -298,7 +274,7 @@ export default function App() {
                   />
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="font-serif text-xl font-bold mb-3">{unit.name}</h3>
+                  <h3 className="font-sans text-xl font-bold mb-3">{unit.name}</h3>
                   <div className="flex items-start gap-2 text-gray-600 text-sm mb-6 flex-grow">
                     <MapPin size={16} className="flex-shrink-0 mt-1 text-[#C83333]" />
                     <p>{unit.address}</p>
@@ -338,7 +314,7 @@ export default function App() {
             <div className="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center mb-6 text-[#C83333]">
               <Recycle size={32} strokeWidth={1.5} />
             </div>
-            <h3 className="font-serif text-2xl font-bold mb-4">Reduza</h3>
+            <h3 className="font-sans text-2xl font-bold mb-4">Reduza</h3>
             <p className="text-gray-600 text-sm leading-relaxed">
               37 kgs de roupas são descartados anualmente pela mulher moderna. Alugue e ajude a reduzir esse número.
             </p>
@@ -348,7 +324,7 @@ export default function App() {
             <div className="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center mb-6 text-[#C83333]">
               <RefreshCw size={32} strokeWidth={1.5} />
             </div>
-            <h3 className="font-serif text-2xl font-bold mb-4">Reuse</h3>
+            <h3 className="font-sans text-2xl font-bold mb-4">Reuse</h3>
             <p className="text-gray-600 text-sm leading-relaxed">
               Quando o ciclo do aluguel se encerra, nossas peças vão para projetos sociais de upcycling.
             </p>
@@ -358,7 +334,7 @@ export default function App() {
             <div className="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center mb-6 text-[#C83333]">
               <Leaf size={32} strokeWidth={1.5} />
             </div>
-            <h3 className="font-serif text-2xl font-bold mb-4">Repense</h3>
+            <h3 className="font-sans text-2xl font-bold mb-4">Repense</h3>
             <p className="text-gray-600 text-sm leading-relaxed">
               Alugando você incentiva a moda compartilhada, a economia circular e reduz os impactos ambientais.
             </p>
@@ -367,30 +343,37 @@ export default function App() {
       </section>
 
       {/* Section 8: CTA Background */}
-      <section className="relative py-32 px-4 md:px-8 flex flex-col items-center justify-center text-center overflow-hidden">
+      <section className="relative py-32 md:py-40 px-4 md:px-8 min-h-[80vh] md:min-h-[600px] flex flex-col items-center justify-center text-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          {/* Imagem Fundo CTA - Dimensão recomendada: 1920x1080px */}
+          {/* Imagem Fundo CTA Desktop - Dimensão recomendada: 1920x1080px */}
           <img 
-            src="https://res.cloudinary.com/doqw5aqcf/image/upload/v1773088648/mulher-jovem-vestido-vermelho-joias-elegante_wy3lw2.webp" 
-            alt="Mulher de vestido" 
-            className="w-full h-full object-cover object-top"
+            src="https://res.cloudinary.com/doqw5aqcf/image/upload/v1774478235/banner-final-desktop_y1clb3.png" 
+            alt="Mulher de vestido Desktop" 
+            className="hidden md:block w-full h-full object-cover object-top"
+            referrerPolicy="no-referrer"
+          />
+          {/* Imagem Fundo CTA Mobile - Dimensão recomendada: 1080x1920px */}
+          <img 
+            src="https://res.cloudinary.com/doqw5aqcf/image/upload/v1774478308/banner-final-mobile_btxash.png" 
+            alt="Mulher de vestido Mobile" 
+            className="block md:hidden w-full h-full object-cover object-center"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-black/60"></div>
         </div>
         
-        <div className="relative z-10 max-w-3xl mx-auto text-white">
-          <p className="text-sm md:text-base tracking-widest uppercase mb-4 opacity-90 font-medium">
+        <div className="relative z-10 max-w-3xl mx-auto text-white flex flex-col items-center justify-center h-full gap-6 md:gap-8">
+          <p className="text-sm md:text-base tracking-widest uppercase opacity-90 font-medium">
             O seu momento chega. Você vai estar pronta?
           </p>
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-semibold mb-6 leading-tight">
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight">
             Sua ocasião especial merece o vestido perfeito.
           </h2>
-          <p className="text-lg md:text-xl opacity-90 mb-10 max-w-2xl mx-auto font-light">
+          <p className="text-lg md:text-xl opacity-90 max-w-2xl mx-auto font-light">
             Nossa equipe no WhatsApp está pronta para encontrar o vestido ideal para você, no seu tamanho, na sua data.
           </p>
           
-          <CTAButton href={WHATSAPP_LINK} className="text-lg px-10 py-4">
+          <CTAButton href={WHATSAPP_LINK} className="text-lg px-10 py-4 mt-4">
             <MessageCircle size={24} />
             Falar com Consultora
           </CTAButton>
