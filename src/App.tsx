@@ -90,33 +90,33 @@ const UNITS = [
 const HOW_IT_WORKS = [
   {
     step: "1",
-    title: "ESCOLHA",
-    description: "são mais de 100 peças de grife"
+    title: "ENCONTRE SEU VESTIDO",
+    description: "Navegue pelo site e encontre o seu vestido ideal ou visite alguma de nossas lojas. Escolhido o vestido, é importante OBSERVAR A DESCRIÇÃO E AS MEDIDAS do vestido, para ter certeza que ele servirá perfeitamente."
   },
   {
     step: "2",
     title: "MARQUE A DATA",
-    description: "Sugerimos você marcar para receber o seu vestido até 2 dias antes da data do seu evento."
+    description: "Sugerimos você marcar para receber o seu vestido até 2 dias antes da data do seu evento para ter certeza que ele chegará a tempo."
   },
   {
     step: "3",
     title: "AJUSTES E BAINHA",
-    description: "Fazemos ajustes na alça e na bainha do vestido."
+    description: "Fazemos apenas ajustes na alça e na bainha do vestido, não ajustamos o vestido no corpo, por isso, é importante verificar as medidas no WhatsApp ou em nossas lojas."
   },
   {
     step: "4",
     title: "O VESTIDO CHEGA ATÉ VOCÊ",
-    description: "Vestido chegará lavado, passado, na data certa"
+    description: "Para sua comodidade e segurança, trabalhamos com o serviço de Sedex dos Correios para que o seu vestido chegue a tempo do grande dia!\nO frete de ida é por conta do cliente e o de volta por nossa conta! Você poderá acompanhar seu pedido através do código de rastreio. Guarde com cuidado a caixa e as etiquetas enviadas, pois você precisará deles para enviar o vestido de volta para a gente."
   },
   {
     step: "5",
     title: "TROCA",
-    description: "Se precisar, realizamos a troca (se ainda houver tempo hábil), ou o valor de crédito para a sua próxima locação."
+    description: "Observado todo esse passo a passo, tudo vai correr perfeitamente com o seu aluguel. Mas, se ainda assim você precisar trocar, realizamos a troca (se ainda houver tempo hábil), ou o valor de crédito para a sua próxima locação, respeitando os prazos acordado no contrato de aluguel."
   },
   {
     step: "6",
     title: "DEVOLUÇÃO",
-    description: "Cole a etiqueta e leve aos Correios. Frete por nossa conta!"
+    description: "Temos certeza que fará muito sucesso com o seu vestido. Na data da devolução, coloque-o na caixa, na mesma forma como você recebeu, na capa com o cabide, e leve-o em qualquer agência dos correios mais próxima de você.\nAs etiquetas de devolução e o código dos correios já estarão junto. Não se preocupe com a lavagem, cuidaremos de tudo quando ele chegar em nossas mãos novamente!"
   }
 ];
 
@@ -238,19 +238,17 @@ export default function App() {
       </section>
 
       {/* Section 5: How it Works */}
-      <section className="py-20 px-4 md:px-8 max-w-5xl mx-auto">
+      <section className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
         <h2 className="font-serif text-3xl md:text-4xl text-center mb-16 font-semibold">Como Funciona</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {HOW_IT_WORKS.map((item, index) => (
-            <div key={index} className="flex gap-4">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#C83333] text-white flex items-center justify-center font-serif text-xl font-bold">
+            <div key={index} className="flex flex-col bg-gray-50 p-8 rounded-2xl border border-gray-100 h-full hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 rounded-full bg-[#C83333] text-white flex items-center justify-center font-serif text-2xl font-bold mb-6 shadow-sm">
                 {item.step}
               </div>
-              <div>
-                <h3 className="font-sans text-xl font-bold mb-2">{item.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
-              </div>
+              <h3 className="font-sans text-xl font-bold mb-4 text-gray-900">{item.title}</h3>
+              <p className="text-gray-600 text-sm leading-relaxed flex-grow whitespace-pre-line">{item.description}</p>
             </div>
           ))}
         </div>
@@ -363,9 +361,6 @@ export default function App() {
         </div>
         
         <div className="relative z-10 max-w-3xl mx-auto text-white flex flex-col items-center justify-center h-full gap-6 md:gap-8">
-          <p className="text-sm md:text-base tracking-widest uppercase opacity-90 font-medium">
-            O seu momento chega. Você vai estar pronta?
-          </p>
           <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight">
             Sua ocasião especial merece o vestido perfeito.
           </h2>
