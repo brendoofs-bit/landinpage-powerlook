@@ -167,7 +167,7 @@ export default function App() {
     <div className="min-h-screen bg-white text-[#111111] font-sans selection:bg-[#C83333] selection:text-white">
       
       {/* Section 1: Hero */}
-      <section className="relative w-full h-[400px] md:h-[700px] overflow-hidden flex justify-center bg-white">
+      <section className="relative w-full h-[700px] overflow-hidden flex justify-center bg-white">
         {/* Imagem Hero Desktop - Dimensão recomendada: 1920x700px */}
         <img 
           src="https://res.cloudinary.com/doqw5aqcf/image/upload/v1774477622/banner-hero-versao-desktop_ctlfhr.png" 
@@ -175,11 +175,11 @@ export default function App() {
           className="hidden md:block w-full h-full object-cover"
           referrerPolicy="no-referrer"
         />
-        {/* Imagem Hero Mobile - Dimensão recomendada: 300x400px */}
+        {/* Imagem Hero Mobile - Dimensão recomendada: 400x700px */}
         <img 
           src="https://res.cloudinary.com/doqw5aqcf/image/upload/v1775940112/Design_sem_nome_ykwbzd.png" 
           alt="Hero Background Mobile" 
-          className="block md:hidden w-[300px] h-[400px] object-contain mx-auto"
+          className="block md:hidden w-[400px] h-[700px] object-contain mx-auto"
           referrerPolicy="no-referrer"
         />
       </section>
