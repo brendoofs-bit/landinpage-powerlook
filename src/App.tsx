@@ -1,7 +1,7 @@
-import { useEffect, useCallback, ReactNode } from 'react';
+import { useEffect, useCallback, ReactNode, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import { MapPin, MessageCircle, Recycle, RefreshCw, Leaf, Instagram, Facebook, Twitter } from 'lucide-react';
+import { MapPin, MessageCircle, Recycle, RefreshCw, Leaf, Instagram, Facebook, Twitter, X } from 'lucide-react';
 import { cn } from './lib/utils';
 
 const WHATSAPP_NUMBER = "5521991233015";
@@ -56,6 +56,7 @@ const UNITS = [
   {
     image: "https://res.cloudinary.com/doqw5aqcf/image/upload/v1773087741/loja-fashion-roupas-acessorios-powerlook_g9kxcu.webp",
     name: "RJ - Loja Ipanema",
+    menuName: "Loja Ipanema - Rio de Janeiro - RJ",
     address: "Top Center - R. Visc. de Pirajá, 550 - Loja 111 - Ipanema, Rio de Janeiro - RJ.",
     maps: "https://maps.app.goo.gl/YUZvXJ8MY8K2U5UM8",
     whatsapp: "5521966775459",
@@ -64,6 +65,7 @@ const UNITS = [
   {
     image: "https://res.cloudinary.com/doqw5aqcf/image/upload/v1773087741/powerlook-loja-beleza-fachada-cidade_odexuw.webp",
     name: "RJ - Loja Tijuca",
+    menuName: "Loja Tijuca - Rio de Janeiro - RJ",
     address: "R. Guapeni, 34 - Tijuca, Rio de Janeiro - RJ.",
     maps: "https://maps.app.goo.gl/jWiJtMv9w6JmLEuv7",
     whatsapp: "5521974500814",
@@ -72,6 +74,7 @@ const UNITS = [
   {
     image: "https://res.cloudinary.com/doqw5aqcf/image/upload/v1773087740/loja-soland-sabor-fachada_fadhmf.webp",
     name: "RJ - Loja Barra da Tijuca - Città América",
+    menuName: "Loja Barra da Tijuca - Rio de Janeiro - RJ",
     address: "Città América - Av. das Américas, 700 - Lojas 213 - D, E e F - Barra da Tijuca, Rio de Janeiro - RJ.",
     maps: "https://maps.app.goo.gl/jjJaKr2UExavio588",
     whatsapp: "5521970950644",
@@ -80,6 +83,7 @@ const UNITS = [
   {
     image: "https://res.cloudinary.com/doqw5aqcf/image/upload/v1773087740/vestidos-loja-roupas-shopping-centro-jpg_shmhbd.webp",
     name: "RJ - Loja Freguesia",
+    menuName: "Loja Freguesia - Rio de Janeiro - RJ",
     address: "Estr. dos Três Rios, 1200 - bl 1 loja N - Freguesia de Jacarepaguá, Rio de Janeiro - RJ.",
     maps: "https://maps.app.goo.gl/Ahr1zWjJvPZXFdDZ6",
     whatsapp: "5521999782212",
@@ -126,14 +130,10 @@ const trackWhatsAppClick = () => {
   }
 };
 
-function CTAButton({ href, className, children, onClick }: { href: string, className?: string, children: ReactNode, onClick?: () => void }) {
+function CTAButton({ className, children, onClick }: { className?: string, children: ReactNode, onClick?: () => void }) {
   return (
-    <a 
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+    <button 
       onClick={(e) => {
-        trackWhatsAppClick();
         if (onClick) onClick();
       }}
       className={cn(
@@ -142,13 +142,26 @@ function CTAButton({ href, className, children, onClick }: { href: string, class
       )}
     >
       {children}
-    </a>
+    </button>
   );
 }
 
 export default function App() {
   const [categoriesRef] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay({ delay: 3000 })]);
   const [showcaseRef] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay({ delay: 2000 })]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isWhatsappMenuOpen, setIsWhatsappMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isModalOpen]);
 
   return (
     <div className="min-h-screen bg-white text-[#111111] font-sans selection:bg-[#C83333] selection:text-white">
@@ -164,9 +177,9 @@ export default function App() {
         />
         {/* Imagem Hero Mobile - Dimensão recomendada: 1080x975px */}
         <img 
-          src="https://res.cloudinary.com/doqw5aqcf/image/upload/v1774477622/banner-hero-versao-mobile_mhiqfc.png" 
+          src="https://res.cloudinary.com/doqw5aqcf/image/upload/v1775940112/Design_sem_nome_ykwbzd.png" 
           alt="Hero Background Mobile" 
-          className="block md:hidden w-full h-full object-cover"
+          className="block md:hidden w-full h-full object-contain"
           referrerPolicy="no-referrer"
         />
       </section>
@@ -197,9 +210,8 @@ export default function App() {
         </div>
         
         <div className="flex justify-center">
-          <CTAButton href={WHATSAPP_LINK}>
-            <MessageCircle size={20} />
-            Falar com Consultora
+          <CTAButton onClick={() => setIsModalOpen(true)}>
+            Falar com uma loja
           </CTAButton>
         </div>
       </section>
@@ -229,33 +241,15 @@ export default function App() {
           </div>
           
           <div className="flex justify-center">
-            <CTAButton href={WHATSAPP_LINK}>
-              <MessageCircle size={20} />
-              Quero Alugar
+            <CTAButton onClick={() => setIsModalOpen(true)}>
+              Falar com uma loja
             </CTAButton>
           </div>
         </div>
       </section>
 
-      {/* Section 5: How it Works */}
-      <section className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
-        <h2 className="font-serif text-3xl md:text-4xl text-center mb-16 font-semibold">Como Funciona</h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {HOW_IT_WORKS.map((item, index) => (
-            <div key={index} className="flex flex-col bg-gray-50 p-8 rounded-2xl border border-gray-100 h-full hover:shadow-md transition-shadow">
-              <div className="w-14 h-14 rounded-full bg-[#C83333] text-white flex items-center justify-center font-serif text-2xl font-bold mb-6 shadow-sm">
-                {item.step}
-              </div>
-              <h3 className="font-sans text-xl font-bold mb-4 text-gray-900">{item.title}</h3>
-              <p className="text-gray-600 text-sm leading-relaxed flex-grow whitespace-pre-line">{item.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Section 6: Our Units */}
-      <section className="py-20 px-4 md:px-8 bg-gray-50">
+      {/* Section 5: Our Units */}
+      <section id="nossas-unidades" className="py-20 px-4 md:px-8 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <h2 className="font-serif text-3xl md:text-4xl text-center mb-12 font-semibold">Nossas Unidades</h2>
           
@@ -302,6 +296,23 @@ export default function App() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Section 6: How it Works */}
+      <section className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
+        <h2 className="font-serif text-3xl md:text-4xl text-center mb-16 font-semibold">Como Funciona</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {HOW_IT_WORKS.map((item, index) => (
+            <div key={index} className="flex flex-col bg-gray-50 p-8 rounded-2xl border border-gray-100 h-full hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 rounded-full bg-[#C83333] text-white flex items-center justify-center font-serif text-2xl font-bold mb-6 shadow-sm">
+                {item.step}
+              </div>
+              <h3 className="font-sans text-xl font-bold mb-4 text-gray-900">{item.title}</h3>
+              <p className="text-gray-600 text-sm leading-relaxed flex-grow whitespace-pre-line">{item.description}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -368,9 +379,8 @@ export default function App() {
             Nossa equipe no WhatsApp está pronta para encontrar o vestido ideal para você, no seu tamanho, na sua data.
           </p>
           
-          <CTAButton href={WHATSAPP_LINK} className="text-lg px-10 py-4 mt-4">
-            <MessageCircle size={24} />
-            Falar com Consultora
+          <CTAButton onClick={() => setIsModalOpen(true)} className="text-lg px-10 py-4 mt-4">
+            Falar com uma loja
           </CTAButton>
         </div>
       </section>
@@ -416,16 +426,92 @@ export default function App() {
       </footer>
 
       {/* Floating WhatsApp Widget */}
-      <a
-        href={WHATSAPP_LINK}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={trackWhatsAppClick}
-        className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:bg-[#20bd5a] hover:scale-110 transition-all duration-300 flex items-center justify-center"
-        aria-label="Falar no WhatsApp"
-      >
-        <MessageCircle size={32} />
-      </a>
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        {/* Menu */}
+        {isWhatsappMenuOpen && (
+          <div className="mb-4 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden w-80 animate-in fade-in slide-in-from-bottom-4 duration-300">
+            <div className="bg-[#25D366] text-white p-4 flex justify-between items-center">
+              <h3 className="font-bold text-lg">Fale com uma loja</h3>
+              <button 
+                onClick={() => setIsWhatsappMenuOpen(false)} 
+                className="text-white/80 hover:text-white transition-colors"
+                aria-label="Fechar menu"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            <div className="p-2 flex flex-col max-h-[60vh] overflow-y-auto">
+              {UNITS.map((unit, index) => (
+                <a
+                  key={index}
+                  href={`https://wa.me/${unit.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => {
+                    trackWhatsAppClick();
+                    setIsWhatsappMenuOpen(false);
+                  }}
+                  className="flex flex-col p-3 hover:bg-gray-50 rounded-xl transition-colors border-b border-gray-50 last:border-0"
+                >
+                  <span className="font-bold text-sm text-gray-900">{unit.menuName}</span>
+                  <span className="text-xs text-gray-500 flex items-center gap-1 mt-1">
+                    <MessageCircle size={12} className="text-[#25D366]" />
+                    {unit.whatsappDisplay}
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Toggle Button */}
+        <button
+          onClick={() => setIsWhatsappMenuOpen(!isWhatsappMenuOpen)}
+          className="bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:bg-[#20bd5a] hover:scale-110 transition-all duration-300 flex items-center justify-center"
+          aria-label="Abrir menu do WhatsApp"
+        >
+          {isWhatsappMenuOpen ? <X size={32} /> : <MessageCircle size={32} />}
+        </button>
+      </div>
+
+      {/* Global Stores Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-300">
+            <div className="bg-[#C83333] text-white p-5 flex justify-between items-center">
+              <h3 className="font-serif text-xl font-bold">Escolha uma loja</h3>
+              <button 
+                onClick={() => setIsModalOpen(false)} 
+                className="text-white/80 hover:text-white transition-colors"
+                aria-label="Fechar"
+              >
+                <X size={24} />
+              </button>
+            </div>
+            <div className="p-2 overflow-y-auto">
+              {UNITS.map((unit, index) => (
+                <a
+                  key={index}
+                  href={`https://wa.me/${unit.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => {
+                    trackWhatsAppClick();
+                    setIsModalOpen(false);
+                  }}
+                  className="flex flex-col p-4 hover:bg-gray-50 rounded-xl transition-colors border-b border-gray-100 last:border-0"
+                >
+                  <span className="font-bold text-base text-gray-900">{unit.menuName}</span>
+                  <span className="text-sm text-gray-500 flex items-center gap-2 mt-2">
+                    <MessageCircle size={16} className="text-[#25D366]" />
+                    {unit.whatsappDisplay}
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
