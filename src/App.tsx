@@ -167,19 +167,19 @@ export default function App() {
     <div className="min-h-screen bg-white text-[#111111] font-sans selection:bg-[#C83333] selection:text-white">
       
       {/* Section 1: Hero */}
-      <section className="relative w-full h-[900px] md:h-[700px] overflow-hidden flex justify-center bg-white">
-        {/* Imagem Hero Desktop - Dimensão recomendada: 1920x700px */}
+      <section className="relative w-full overflow-hidden bg-white">
+        {/* Imagem Hero Desktop - Dimensão recomendada: 1920x1080px */}
         <img 
-          src="https://res.cloudinary.com/doqw5aqcf/image/upload/v1774477622/banner-hero-versao-desktop_ctlfhr.png" 
+          src="https://res.cloudinary.com/doqw5aqcf/image/upload/v1777234673/banner_hero_powerlook_desktop_y3gbqy.png" 
           alt="Hero Background Desktop" 
-          className="hidden md:block w-full h-full object-cover"
+          className="hidden md:block w-full h-auto aspect-video object-cover"
           referrerPolicy="no-referrer"
         />
-        {/* Imagem Hero Mobile - Dimensão recomendada: 500x900px */}
+        {/* Imagem Hero Mobile - Dimensão recomendada: 1080x1920px */}
         <img 
-          src="https://res.cloudinary.com/doqw5aqcf/image/upload/v1775940112/Design_sem_nome_ykwbzd.png" 
+          src="https://res.cloudinary.com/doqw5aqcf/image/upload/v1777234673/banner_hero_powerlook_mobile_hlmls9.png" 
           alt="Hero Background Mobile" 
-          className="block md:hidden w-[500px] h-[900px] object-contain mx-auto"
+          className="block md:hidden w-full h-auto aspect-[9/16] object-cover"
           referrerPolicy="no-referrer"
         />
       </section>
