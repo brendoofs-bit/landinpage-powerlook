@@ -301,7 +301,10 @@ export default function App() {
 
       {/* Section 6: How it Works */}
       <section className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
-        <h2 className="font-serif text-3xl md:text-4xl text-center mb-16 font-semibold">Como Funciona</h2>
+        <div className="text-center mb-16">
+          <h2 className="font-serif text-3xl md:text-4xl font-semibold mb-3">Como Funciona</h2>
+          <p className="font-serif text-2xl md:text-3xl font-bold text-gray-800">Alugar Online</p>
+        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {HOW_IT_WORKS.map((item, index) => (
