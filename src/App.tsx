@@ -297,7 +297,7 @@ export default function App() {
                       Ver no Mapa
                     </a>
                     <a 
-                      href={`https://wa.me/${unit.whatsapp}`}
+                      href={`https://wa.me/${unit.whatsapp}?text=Oi!%20Eu%20quero%20saber%20mais%20sobre%20o%20aluguel%20de%20vestidos.`}
                       target="_blank" 
                       rel="noopener noreferrer"
                       onClick={trackWhatsAppClick}
@@ -462,7 +462,7 @@ export default function App() {
               {UNITS.map((unit, index) => (
                 <a
                   key={index}
-                  href={`https://wa.me/${unit.whatsapp}`}
+                  href={`https://wa.me/${unit.whatsapp}?text=Oi!%20Eu%20quero%20saber%20mais%20sobre%20o%20aluguel%20de%20vestidos.`}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => {
@@ -510,7 +510,7 @@ export default function App() {
               {UNITS.map((unit, index) => (
                 <a
                   key={index}
-                  href={`https://wa.me/${unit.whatsapp}`}
+                  href={`https://wa.me/${unit.whatsapp}?text=Oi!%20Eu%20quero%20saber%20mais%20sobre%20o%20aluguel%20de%20vestidos.`}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => {
