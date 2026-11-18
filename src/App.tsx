@@ -4,6 +4,11 @@ import Autoplay from 'embla-carousel-autoplay';
 import { MapPin, MessageCircle, Recycle, RefreshCw, Leaf, Instagram, Facebook, Twitter, X } from 'lucide-react';
 import { cn } from './lib/utils';
 
+// Entrega otimizada do Cloudinary: formato automático (AVIF/WebP), qualidade
+// automática e largura máxima. Reduz o peso das imagens e o consumo de banda.
+const cld = (url: string, width: number) =>
+  url.replace('/image/upload/', `/image/upload/f_auto,q_auto,c_limit,w_${width}/`);
+
 const WHATSAPP_NUMBER = "5521991233015";
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}`;
 
@@ -183,20 +188,20 @@ export default function App() {
       
       {/* Section 1: Hero */}
       <section className="relative w-full overflow-hidden bg-white">
-        {/* Imagem Hero Desktop - Dimensão recomendada: 1920x1080px */}
-        <img 
-          src="https://res.cloudinary.com/doqw5aqcf/image/upload/v1777234673/banner_hero_powerlook_desktop_y3gbqy.png" 
-          alt="Hero Background Desktop" 
-          className="hidden md:block w-full h-auto aspect-video object-cover"
-          referrerPolicy="no-referrer"
-        />
-        {/* Imagem Hero Mobile - Dimensão recomendada: 1080x1920px */}
-        <img 
-          src="https://res.cloudinary.com/doqw5aqcf/image/upload/v1777234673/banner_hero_powerlook_mobile_hlmls9.png" 
-          alt="Hero Background Mobile" 
-          className="block md:hidden w-full h-auto aspect-[9/16] object-cover"
-          referrerPolicy="no-referrer"
-        />
+        {/* Imagem Hero - Desktop 1920x1080px e Mobile 1080x1920px. O <picture> faz o navegador baixar só a versão da tela dele */}
+        <picture className="block">
+          <source
+            media="(min-width: 768px)"
+            srcSet={cld("https://res.cloudinary.com/doqw5aqcf/image/upload/v1777234673/banner_hero_powerlook_desktop_y3gbqy.png", 1920)}
+          />
+          <img
+            src={cld("https://res.cloudinary.com/doqw5aqcf/image/upload/v1777234673/banner_hero_powerlook_mobile_hlmls9.png", 1080)}
+            alt="Hero Background"
+            className="block w-full h-auto aspect-[9/16] md:aspect-video object-cover"
+            referrerPolicy="no-referrer"
+            fetchPriority="high"
+          />
+        </picture>
       </section>
 
       {/* Section 2: Categories */}
@@ -210,10 +215,11 @@ export default function App() {
                 <div className="relative group overflow-hidden rounded-lg aspect-[3/4]">
                   {/* Imagem Categoria - Dimensão recomendada: 600x800px (proporção 3:4) */}
                   <img 
-                    src={category.image} 
-                    alt={category.name} 
+                    src={cld(category.image, 800)}
+                    alt={category.name}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     referrerPolicy="no-referrer"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end justify-center pb-8">
                     <h3 className="text-white font-serif text-xl tracking-wider">{category.name}</h3>
@@ -243,7 +249,7 @@ export default function App() {
                   <div className="aspect-[3/4] overflow-hidden rounded-lg shadow-sm">
                     {/* Imagem Vitrine - Dimensão recomendada: 600x800px (proporção 3:4) */}
                     <img 
-                      src={img} 
+                      src={cld(img, 800)}
                       alt={`Vestido ${index + 1}`} 
                       className="w-full h-full object-cover"
                       referrerPolicy="no-referrer"
@@ -274,10 +280,11 @@ export default function App() {
                 <div className="aspect-video overflow-hidden">
                   {/* Imagem Unidade - Dimensão recomendada: 800x450px (proporção 16:9) */}
                   <img 
-                    src={unit.image} 
-                    alt={unit.name} 
+                    src={cld(unit.image, 800)}
+                    alt={unit.name}
                     className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"
+                    loading="lazy"
                   />
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
@@ -372,20 +379,20 @@ export default function App() {
       {/* Section 8: CTA Background */}
       <section className="relative py-32 md:py-40 px-4 md:px-8 min-h-[80vh] md:min-h-[600px] flex flex-col items-center justify-center text-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          {/* Imagem Fundo CTA Desktop - Dimensão recomendada: 1920x1080px */}
-          <img 
-            src="https://res.cloudinary.com/doqw5aqcf/image/upload/v1774478235/banner-final-desktop_y1clb3.png" 
-            alt="Mulher de vestido Desktop" 
-            className="hidden md:block w-full h-full object-cover object-top"
-            referrerPolicy="no-referrer"
-          />
-          {/* Imagem Fundo CTA Mobile - Dimensão recomendada: 1080x1920px */}
-          <img 
-            src="https://res.cloudinary.com/doqw5aqcf/image/upload/v1774478308/banner-final-mobile_btxash.png" 
-            alt="Mulher de vestido Mobile" 
-            className="block md:hidden w-full h-full object-cover object-center"
-            referrerPolicy="no-referrer"
-          />
+          {/* Imagem Fundo CTA - Desktop 1920x1080px e Mobile 1080x1920px. O <picture> faz o navegador baixar só a versão da tela dele */}
+          <picture className="block w-full h-full">
+            <source
+              media="(min-width: 768px)"
+              srcSet={cld("https://res.cloudinary.com/doqw5aqcf/image/upload/v1774478235/banner-final-desktop_y1clb3.png", 1920)}
+            />
+            <img
+              src={cld("https://res.cloudinary.com/doqw5aqcf/image/upload/v1774478308/banner-final-mobile_btxash.png", 1080)}
+              alt="Mulher de vestido"
+              className="block w-full h-full object-cover object-center md:object-top"
+              referrerPolicy="no-referrer"
+              loading="lazy"
+            />
+          </picture>
           <div className="absolute inset-0 bg-black/60"></div>
         </div>
         
@@ -408,10 +415,11 @@ export default function App() {
         <div className="max-w-4xl mx-auto flex flex-col items-center">
           {/* Imagem Logo Footer - Dimensão recomendada: 300x100px */}
           <img 
-            src="https://res.cloudinary.com/doqw5aqcf/image/upload/v1773789401/logo_powerlook_vzu3or.webp" 
-            alt="PowerLook Logo" 
+            src={cld("https://res.cloudinary.com/doqw5aqcf/image/upload/v1773789401/logo_powerlook_vzu3or.webp", 400)}
+            alt="PowerLook Logo"
             className="w-48 mb-6 filter brightness-0 invert opacity-90"
             referrerPolicy="no-referrer"
+            loading="lazy"
           />
           
           <p className="font-serif text-xl italic tracking-wide mb-8 opacity-90">
